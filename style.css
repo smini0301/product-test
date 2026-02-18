@@ -4,6 +4,20 @@
     --background-color: #f0f0f0;
     --text-color: #333;
     --white: #fff;
+    --machine-bg: #fff;
+    --h1-color: #fff;
+    --gradient-start: #6d327c;
+    --gradient-end: #36C486;
+}
+
+body.dark-theme {
+    --background-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --white: #242424;
+    --machine-bg: #333;
+    --h1-color: #FFC107;
+    --gradient-start: #121212;
+    --gradient-end: #2c3e50;
 }
 
 body {
@@ -15,7 +29,8 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: linear-gradient(to right top, #6d327c, #485DA6, #00a1ba, #00BF98, #36C486);
+    background-image: linear-gradient(to right top, var(--gradient-start), #485DA6, #00a1ba, #00BF98, var(--gradient-end));
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -23,15 +38,17 @@ body {
 }
 
 h1 {
-    color: var(--white);
+    color: var(--h1-color);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    transition: color 0.3s ease;
 }
 
 .lotto-machine {
-    background-color: var(--white);
+    background-color: var(--machine-bg);
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transition: background-color 0.3s ease;
 }
 
 .number-display {
@@ -47,7 +64,7 @@ h1 {
     height: 50px;
     border-radius: 50%;
     background-color: var(--primary-color);
-    color: var(--white);
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +80,7 @@ h1 {
 
 #generate-btn {
     background-color: var(--secondary-color);
-    color: var(--text-color);
+    color: #333;
     border: none;
     padding: 1rem 2rem;
     font-size: 1.2rem;
@@ -76,4 +93,30 @@ h1 {
 #generate-btn:hover {
     background-color: #ffca2c;
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#theme-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: background 0.3s ease;
+}
+
+#theme-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-theme #theme-btn {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
 }
