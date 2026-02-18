@@ -11,112 +11,147 @@
 }
 
 body.dark-theme {
-    --background-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --white: #242424;
-    --machine-bg: #333;
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --white: #1e1e1e;
+    --machine-bg: #2d2d2d;
     --h1-color: #FFC107;
-    --gradient-start: #121212;
-    --gradient-end: #2c3e50;
+    --gradient-start: #000000;
+    --gradient-end: #1a1a1a;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     background-image: linear-gradient(to right top, var(--gradient-start), #485DA6, #00a1ba, #00BF98, var(--gradient-end));
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-attachment: fixed;
+    transition: all 0.3s ease;
 }
 
 .container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
     text-align: center;
+    z-index: 1;
 }
 
 h1 {
     color: var(--h1-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 2rem;
     transition: color 0.3s ease;
 }
 
 .lotto-machine {
     background-color: var(--machine-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    transition: background-color 0.3s ease;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .number-display {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.2rem;
     margin-bottom: 2rem;
-    min-height: 50px;
+}
+
+.game-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 50px;
+    transition: background 0.3s ease;
+}
+
+body.dark-theme .game-row {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .number {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     background-color: var(--primary-color);
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-.number:hover {
-    transform: scale(1.1);
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 #generate-btn {
     background-color: var(--secondary-color);
     color: #333;
     border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    border-radius: 8px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #generate-btn:hover {
     background-color: #ffca2c;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+#generate-btn:active {
+    transform: translateY(1px);
 }
 
 .theme-toggle {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
+    z-index: 10;
 }
 
 #theme-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
     cursor: pointer;
-    backdrop-filter: blur(5px);
-    transition: background 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 #theme-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 body.dark-theme #theme-btn {
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    color: #FFC107;
+    border-color: #FFC107;
 }
