@@ -1,6 +1,29 @@
 let currentDate = new Date();
 let events = JSON.parse(localStorage.getItem('familyEvents')) || {};
 
+// 2026년 한국 공휴일 (임시 목록)
+const holidays = {
+    '2026-01-01': '신정',
+    '2026-02-16': '설날 연휴',
+    '2026-02-17': '설날',
+    '2026-02-18': '설날 연휴',
+    '2026-03-01': '삼일절',
+    '2026-03-02': '대체공휴일',
+    '2026-05-05': '어린이날',
+    '2026-05-24': '부처님 오신 날',
+    '2026-05-25': '대체공휴일',
+    '2026-06-06': '현충일',
+    '2026-08-15': '광복절',
+    '2026-08-17': '대체공휴일',
+    '2026-09-24': '추석 연휴',
+    '2026-09-25': '추석',
+    '2026-09-26': '추석 연휴',
+    '2026-10-03': '개천절',
+    '2026-10-05': '대체공휴일',
+    '2026-10-09': '한글날',
+    '2026-12-25': '성탄절'
+};
+
 const monthDisplay = document.getElementById('month-display');
 const calendarGrid = document.getElementById('calendar-grid');
 const modal = document.getElementById('event-modal');
@@ -45,16 +68,26 @@ function renderCalendar() {
 function createDayCell(year, month, day, isOtherMonth) {
     const dateObj = new Date(year, month, day);
     const dateKey = `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
+    const dayOfWeek = dateObj.getDay(); // 0: 일요일, 6: 토요일
     
     const cell = document.createElement('div');
     cell.className = 'day-cell' + (isOtherMonth ? ' other-month' : '');
     
+    // 주말 및 공휴일 클래스 추가
+    if (dayOfWeek === 0) cell.classList.add('sunday');
+    if (dayOfWeek === 6) cell.classList.add('saturday');
+    if (holidays[dateKey]) cell.classList.add('holiday');
+
     const today = new Date();
     if (dateObj.toDateString() === today.toDateString()) {
         cell.classList.add('today');
     }
 
-    cell.innerHTML = `<div class="date-num">${day}</div>`;
+    let innerHTML = `<div class="date-num">${day}</div>`;
+    if (holidays[dateKey]) {
+        innerHTML += `<div class="holiday-name" style="font-size: 0.6rem; color: #dc3545; margin-bottom: 2px;">${holidays[dateKey]}</div>`;
+    }
+    cell.innerHTML = innerHTML;
     
     // 이벤트 렌더링
     if (events[dateKey]) {

@@ -80,9 +80,14 @@ h1 { margin: 0; font-size: 1.5rem; }
 .day-cell.today { background: var(--today-bg); }
 .day-cell.other-month { color: #ccc; }
 
+.day-cell.saturday .date-num { color: #007bff; }
+.day-cell.sunday .date-num,
+.day-cell.holiday .date-num { color: #dc3545; }
+
 .date-num {
     font-size: 0.9rem;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .event-item {
