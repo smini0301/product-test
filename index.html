@@ -1,38 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>우리 가족 달력</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="theme-toggle">
-        <button id="theme-btn">Dark Mode</button>
-    </div>
     <div class="container">
-        <h1>Lotto Number Generator</h1>
-        <div class="lotto-machine">
-            <div class="number-display"></div>
-            <button id="generate-btn">Generate Numbers</button>
-        </div>
+        <header>
+            <h1 id="month-display">2026년 2월</h1>
+            <div class="nav-btns">
+                <button id="prev-month">&lt;</button>
+                <button id="today-btn">오늘</button>
+                <button id="next-month">&gt;</button>
+            </div>
+        </header>
 
-        <div class="contact-section">
-            <h2>Partnership Inquiry</h2>
-            <form action="https://formspree.io/f/mqedlakz" method="POST" class="contact-form">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="Message" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Inquiry</button>
-            </form>
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- 요일 -->
+            <div class="day-header">일</div>
+            <div class="day-header">월</div>
+            <div class="day-header">화</div>
+            <div class="day-header">수</div>
+            <div class="day-header">목</div>
+            <div class="day-header">금</div>
+            <div class="day-header">토</div>
+            <!-- 날짜가 여기에 동적으로 생성됩니다 -->
         </div>
     </div>
+
+    <!-- 일정 추가 모달 -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-date-display">일정 추가</h2>
+            <form id="event-form">
+                <input type="hidden" id="event-date">
+                <div class="form-group">
+                    <label for="event-title">일정 내용</label>
+                    <input type="text" id="event-title" required placeholder="예: 엄마 생신 저녁 식사">
+                </div>
+                <div class="form-group">
+                    <label for="event-member">가족 구성원</label>
+                    <select id="event-member">
+                        <option value="common">공통</option>
+                        <option value="father">아빠</option>
+                        <option value="mother">엄마</option>
+                        <option value="son">아들</option>
+                        <option value="daughter">딸</option>
+                    </select>
+                </div>
+                <button type="submit" class="save-btn">저장하기</button>
+            </form>
+            <div id="event-list"></div>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
